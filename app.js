@@ -1,9 +1,10 @@
-var express = require('express')
+var express = require('express');
+const PORT = process.env.PORT || 5000;
 
 var app = express()
-var port = 3000
 
 app.set('view engine', 'ejs');
+app.set('port', PORT);
 
 //app.get('/', (req, res) => res.send('Hello World!') )
 
@@ -11,6 +12,6 @@ app.get('/', function(req, res) {
     res.render('index');
 });
 
-app.listen(port, function() { 
-    console.log('Example app listening on port 3000')
+app.listen(PORT, function() { 
+    console.log('Example app listening on port 5000')
 });
