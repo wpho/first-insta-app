@@ -16,8 +16,9 @@ app.get('/', function(req, res) {
     res.render('index');
 });
 
-app.get('/media', function(req, res) {
+app.get('/media', function(req, response) {
     var code = req.query.code;
+    var result;
     axios
         .post('https://api.instagram.com/oauth/access_token', {
             client_id: '857858091290618',
@@ -28,13 +29,16 @@ app.get('/media', function(req, res) {
         })
         .then(res => {
             console.log('access token: ' + res.access_token)
-            console.log(res)
+            console.log(res);
+            result = res;
         })
         .catch(error => {
             console.log(error)
+            result = error;
         })
 
-    res.render('media', {code: code});
+    
+    response.render('media', {code: code, result: result});
 });
 
 app.listen(PORT, function() { 
