@@ -31,14 +31,16 @@ app.get('/media', function(req, response) {
             console.log('access token: ' + res.access_token)
             console.log(res);
             result = res;
+            response.render('media', {code: code, result: result});
         })
         .catch(error => {
             console.log(error)
             result = error;
+            response.render('media', {code: code, result: result});
         })
 
     
-    response.render('media', {code: code, result: result});
+    //response.render('media', {code: code, result: result});
 });
 
 app.listen(PORT, function() { 
