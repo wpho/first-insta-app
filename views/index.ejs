@@ -4,8 +4,12 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
-        <input type="button" onclick="location.href='https://api.instagram.com/oauth/authorize?client_id=857858091290618&redirect_uri=https://wpho-test-app.herokuapp.com/media&scope=user_profile,user_media&response_type=code';" value='Click here!' />
-
+        <input type="button" onclick="location.href='https://api.instagram.com/oauth/authorize?client_id=857858091290618&redirect_uri=https://wpho-test-app.herokuapp.com/media&scope=user_profile,user_media&response_type=code';" value='Display 1st post in your instagram acc?' />
+        <div style="margin-top:10px;"></div>
+        <div>
+            <span style="font-family:verdana">Play Tetris?</span> 
+            <button onclick="location.href='/tetris'" style="background-color: white; border: white;"> <img src="/images/start-btn.png" width="100px;" /> </button>
+        </div>
         <!-- <script>
             async function getCode() {
                 const response = await axios.get('https://api.instagram.com/%20%20?client_id=857858091290618%0A%20%20&redirect_uri=http://wpho-test-app.herokuapp.com/media%0A%20%20&scope=user_profile,user_media%0A%20%20&response_type=code');

@@ -10,12 +10,17 @@ var app = express()
 app.set('view engine', 'ejs');
 app.set('port', PORT);
 
+app.use(express.static('public'));
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.get('/', function(req, res) {
     res.render('index');
 });
+
+app.get('/tetris', function(req, res) {
+    res.render('tetris');
+})
 
 app.get('/media', function(req, globalResponse) {
     var options = { method: 'POST',
