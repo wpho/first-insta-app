@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '#7F29FF',
         '#F53CFF',
         '#61DFFF' //'#85e7fc' 
-    ]
+    ];
 
     // The Tetrominoes
     const lTetromino = [
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (current.some(index => squares[currentPosition +index].classList.contains('taken'))) {
-            currentPosition += 1
+            currentPosition += 1;
         }
 
         draw();
@@ -184,10 +184,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
-            currentPosition -= 1
+            currentPosition -= 1;
         }
 
         draw();   
+    }
+
+    function isAtRight() {
+        return current.some(index => (currentPosition + index + 1) % width === 0);
+    }
+
+    function isAtLeft() {
+        return current.some(index => (currentPosition + index) % width === 0);
+    }
+
+    function checkRotatedPosition(P) {
+        P = P || currentPosition; // get current position. Then check if piece is near left edge
+        if ((P+1) % width < 4) {
+            if (isAtRight()) {
+                currentPosition += 1;
+                checkRotatedPosition(P);
+            }
+        }
+        else if (P % width > 5) {
+            if (isAtLeft()) {
+                currentPosition -= 1;
+                checkRotatedPosition(P);
+            }
+        }
     }
 
     //rotate the tetromino
@@ -198,13 +222,14 @@ document.addEventListener('DOMContentLoaded', () => {
             currentRotation = 0;
         }
         current = theTetrominoes[random][currentRotation];
+        checkRotatedPosition();
         draw();
     }
 
     // show up next tetromino in mini-grid display
     const displaySquares = document.querySelectorAll('.mini-grid div');
     const displayWidth = 4;
-    let displayIndex = 0;
+    const displayIndex = 0;
 
     // the Tetrominos without rotations
     const upNextTetrominoes = [
@@ -220,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // remove any trace of a tetromino form the entire grid
         displaySquares.forEach(square => {
             square.classList.remove('tetromino');
-            square.style.backgroundColor = ''
+            square.style.backgroundColor = '';
         });
         upNextTetrominoes[nextRandom].forEach(index => {
             displaySquares[displayIndex + index].classList.add('tetromino');
@@ -232,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startBtn.addEventListener('click', () => {
         if (timerId) {
             clearInterval(timerId);
-            timerId = null
+            timerId = null;
         } else {
             draw();
             timerId = setInterval(moveDown, 1000);
@@ -256,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 const squaresRemoved = squares.splice(i, width);
                 squares = squaresRemoved.concat(squares);
-                squares.forEach(cell => grid.appendChild(cell))
+                squares.forEach(cell => grid.appendChild(cell));
             }
         }
     }
