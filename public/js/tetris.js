@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
             timerId = null;
         } else {
             draw();
-            timerId = setInterval(moveDown, 1000);
+            timerId = setInterval(moveDown, 250);
             nextRandom = Math.floor(Math.random() * theTetrominoes.length);
             displayShape();
         }
